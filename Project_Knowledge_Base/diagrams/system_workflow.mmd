@@ -1,0 +1,42 @@
+%% End-to-End Operational Workflow
+flowchart TD
+    A["Receive recording"] --> B["Resolve channels → canonical 19"]
+    B --> C{"Schema &<br/>sampling rate valid?"}
+    C -->|No| ERR["Reject with reason"]
+    C -->|Yes| D["Compute AQI +<br/>per-window quality"]
+    D --> E["Detrend +<br/>reference bad-channel rule"]
+    E --> F["Segment 4 s windows<br/>group into 10-window sequences"]
+    F --> G["Band-pass<br/>δ θ α β γ"]
+    G --> H["SpecParam fit 1-40 Hz<br/>accept R² ≥ 0.85"]
+    G --> I["Joint Löwdin<br/>orthogonalisation"]
+    I --> J["Hilbert envelope<br/>+ correlation"]
+    J --> K["SPD guard<br/>clip λ ≥ 1e-6, log correction"]
+    K --> L["Fréchet mean<br/>+ tangent projection"]
+    L --> M["Alignment arm<br/>(ablation knob)"]
+    H --> N["Trait path<br/>χ node priors"]
+    M --> O["State path<br/>aligned connectivity"]
+    N --> P["Dual-path fusion"]
+    O --> P
+    P --> Q["5-Lobe GATv2<br/>spatial encoder"]
+    Q --> R["Parallel temporal<br/>Transformer + BiGRU"]
+    R --> S["Participant-level<br/>embedding"]
+    S --> T["Calibrate<br/>probability p̂"]
+    D --> U{"AQI ≥ gate<br/>threshold?"}
+    T --> V{"τ = accept?"}
+    U -->|No| W["ABSTAIN<br/>insufficient evidence"]
+    U -->|Yes| V
+    V -->|Yes| X["Report calibrated<br/>index + operating point"]
+    V -->|No| W
+    X --> Y["Panel 1: Screening"]
+    W --> Y
+    D --> Z["Panel 2: Reliability<br/>risk-coverage · attrition · integrity"]
+    K --> Z
+    Q --> AA["Panel 3: Topology<br/>+ split-half stability"]
+    X --> REC["Persist result record<br/>+ reproducibility ledger"]
+    W --> REC
+    Z --> REC
+    AA --> REC
+
+    style W fill:#f8cecc,stroke:#b85450
+    style X fill:#d5e8d4,stroke:#82b366
+    style K fill:#f8cecc,stroke:#b85450

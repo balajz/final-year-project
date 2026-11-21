@@ -1,0 +1,51 @@
+%% Data and Information Flow
+flowchart LR
+    subgraph SRC["Sources"]
+        CSV["IEEE-121<br/>.csv 19ch 128Hz"]
+        SET["HBN<br/>.set (EEGLAB)"]
+        OTH["EDF / BDF / FIF"]
+    end
+
+    CSV --> ING
+    SET --> ING
+    OTH --> ING
+    ING["Canonicalise<br/>19 channels<br/>fixed order"]
+
+    ING --> RAW["Raw matrix<br/>19 × N"]
+    ING --> PROV["Provenance<br/>format · imputed · resampled"]
+
+    RAW --> AQI["AQI<br/>+ quality vector"]
+    RAW --> PRE["Detrend +<br/>bad-channel rule"]
+
+    PRE --> WIN["4 s windows<br/>×10 sequences"]
+    WIN --> BANDS["Band-pass<br/>δ θ α β γ"]
+
+    BANDS --> SPEC["SpecParam<br/>χ · b · R²"]
+    BANDS --> LOD["Joint Löwdin<br/>orthogonalisation"]
+    LOD --> ENV["Envelope<br/>correlation"]
+    ENV --> SPD["SPD guard"]
+    SPD --> GEO["Fréchet +<br/>tangent projection"]
+
+    SPEC --> REP["Dual-path<br/>representation"]
+    GEO --> REP
+    REP --> ENC["GATv2 +<br/>temporal encoders"]
+    ENC --> CAL["Calibrated<br/>probability"]
+
+    AQI --> GATE["Evidence<br/>gate"]
+    CAL --> GATE
+
+    SPD --> INTEG["Integrity stats<br/>n_not_psd · min λ · correction"]
+    PRE --> ATTR["Attrition<br/>per-group exclusions"]
+
+    GATE --> REC["Result record<br/>+ ledger"]
+    INTEG --> REC
+    ATTR --> REC
+    PROV --> REC
+    AQI --> REC
+
+    REC --> P1["Panel 1<br/>Screening"]
+    REC --> P2["Panel 2<br/>Reliability"]
+    ENC --> P3["Panel 3<br/>Topology"]
+
+    style SPD fill:#f8cecc,stroke:#b85450
+    style REC fill:#ffe6cc,stroke:#d79b00

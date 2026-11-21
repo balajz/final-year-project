@@ -221,3 +221,27 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---------------------------------------------------------------------------
+# Project-specific: research vault
+# ---------------------------------------------------------------------------
+
+# Core dataset (~255 MB) — download separately, never commit
+data/
+!data/.gitkeep
+
+# Regenerable feature caches (large binaries; recreated by scripts)
+results/*.npz
+results/*.npy
+results/*.pkl
+
+# Run logs
+logs/
+
+# Editor / OS metadata
+.obsidian/
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes

@@ -1,0 +1,69 @@
+%% System Architecture — Riemann-ST-GraphFormer with Evidence Gate (C0) + Reliability Workbench (C5)
+graph TD
+    IN["EEG Recording<br/>.csv .set .bdf .edf .fif"]
+
+    subgraph L1["L1 Ingestion & Canonicalisation"]
+        CAN["Channel mapping<br/>modern/legacy/EGI-128<br/>→ 19 canonical"]
+        IMP["Median imputation<br/>+ provenance"]
+    end
+
+    subgraph L2["L2 Quality Assessment"]
+        AQI["Artifact Quality Index<br/>muscle · blink · amplitude · flatline"]
+    end
+
+    subgraph L3["L3 Preprocessing & Spectral"]
+        PRE["Detrend + reference<br/>bad-channel rule"]
+        SEG["4 s windows<br/>10-window sequences"]
+        BND["Band-pass<br/>δ 0.5-4 | θ 4-8 | α 8-13 | β 13-30 | γ 30-45"]
+        SPC["SpecParam 1-40 Hz<br/>accept R² ≥ 0.85<br/>→ exponent χ, offset b"]
+    end
+
+    subgraph L4["L4 Connectivity & Geometry"]
+        LOD["Global joint Löwdin<br/>X⊥ = X(XᵀX)^-1/2"]
+        ENV["Hilbert envelope<br/>+ Pearson correlation"]
+        SPR["SPD Guard<br/>clip λ ≥ 1e-6<br/>log correction"]
+        FRE["Fréchet mean<br/>+ tangent projection"]
+        ALN["Alignment arms<br/>none | euclid | riemann | riemann_band"]
+    end
+
+    subgraph L5["L5 Representation & Encoders"]
+        TRT["Trait path<br/>gain-invariant χ node priors"]
+        STA["State path<br/>aligned dynamic connectivity"]
+        FUS["Dual-path fusion"]
+        GAT["5-Lobe GATv2<br/>+ learnable sparse gate"]
+        TMP["Parallel temporal<br/>Transformer ∥ BiGRU"]
+    end
+
+    subgraph L6["L6 Calibration & Evidence Gate"]
+        CAL["Probability calibration<br/>Brier · ECE"]
+        GTE["Evidence gate<br/>AQI vs coverage target κ"]
+    end
+
+    subgraph L7["L7 Presentation"]
+        P1["Panel 1<br/>Screening Result"]
+        P2["Panel 2<br/>Reliability Report"]
+        P3["Panel 3<br/>Topology View"]
+    end
+
+    IN --> CAN --> IMP
+    IMP --> AQI
+    IMP --> PRE --> SEG --> BND
+    BND --> SPC
+    BND --> LOD --> ENV --> SPR --> FRE --> ALN
+    SPC --> TRT
+    ALN --> STA
+    TRT --> FUS
+    STA --> FUS
+    FUS --> GAT --> TMP
+    TMP --> CAL
+    AQI --> GTE
+    CAL --> GTE
+    GTE --> P1
+    GTE --> P2
+    SPR --> P2
+    AQI --> P2
+    GAT --> P3
+
+    style GTE fill:#ffe6cc,stroke:#d79b00
+    style P2 fill:#d5e8d4,stroke:#82b366
+    style SPR fill:#f8cecc,stroke:#b85450

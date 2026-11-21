@@ -1,0 +1,22 @@
+{
+  "dataset": "data/adhdata.csv",
+  "n_subjects": 121,
+  "n_adhd": 61,
+  "n_control": 60,
+  "artifact_features": [
+    "duration_sec",
+    "log_fp_variance",
+    "fp_delta_power",
+    "emg_30_60hz_power",
+    "log_total_variance"
+  ],
+  "emg_gamma_correlation": -0.0494,
+  "repeated_cv": {
+    "n_splits": 5,
+    "n_repeats": 10,
+    "mean_auroc": 0.8089,
+    "std_auroc": 0.0664,
+    "min_auroc": 0.5779,
+    "max_auroc": 0.9259
+  }
+}

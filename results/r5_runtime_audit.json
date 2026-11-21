@@ -1,0 +1,294 @@
+{
+  "band_disjointness": {
+    "passed": true,
+    "bands": {
+      "delta": [
+        0.5,
+        4.0
+      ],
+      "theta": [
+        4.0,
+        8.0
+      ],
+      "alpha": [
+        8.0,
+        13.0
+      ],
+      "beta": [
+        13.0,
+        30.0
+      ],
+      "gamma": [
+        30.0,
+        45.0
+      ],
+      "emg": [
+        30.0,
+        60.0
+      ]
+    },
+    "specparam": {
+      "fit_range_hz": [
+        1.0,
+        40.0
+      ],
+      "r2_min_threshold": 0.85,
+      "max_n_peaks": 6,
+      "peak_width_limits": [
+        1.0,
+        8.0
+      ],
+      "aperiodic_mode": "fixed"
+    }
+  },
+  "alias_test": "PASSED",
+  "ieee121_csv_audit": {
+    "file_size_mb": 254.9,
+    "total_rows": 2166383,
+    "raw_header": [
+      "Fp1",
+      "Fp2",
+      "F3",
+      "F4",
+      "C3",
+      "C4",
+      "P3",
+      "P4",
+      "O1",
+      "O2",
+      "F7",
+      "F8",
+      "T7",
+      "T8",
+      "P7",
+      "P8",
+      "Fz",
+      "Cz",
+      "Pz",
+      "Class",
+      "ID"
+    ],
+    "uses_legacy_names": [],
+    "uses_modern_names": [
+      "T7",
+      "T8",
+      "P7",
+      "P8"
+    ],
+    "all_19_channels_resolved": true,
+    "missing_channels": [],
+    "channel_ordering_in_csv": [
+      "Fp1",
+      "Fp2",
+      "F3",
+      "F4",
+      "C3",
+      "C4",
+      "P3",
+      "P4",
+      "O1",
+      "O2",
+      "F7",
+      "F8",
+      "T7",
+      "T8",
+      "P7",
+      "P8",
+      "Fz",
+      "Cz",
+      "Pz"
+    ],
+    "canonical_ordered_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "n_subjects_total": 121,
+    "class_counts": {
+      "ADHD": 61,
+      "Control": 60
+    },
+    "adhd_duration_sec": {
+      "mean": 154.59,
+      "std": 57.66,
+      "range": [
+        72.55,
+        337.91
+      ]
+    },
+    "ctrl_duration_sec": {
+      "mean": 124.91,
+      "std": 29.66,
+      "range": [
+        62.37,
+        203.01
+      ]
+    },
+    "nan_count_in_samples": 0
+  },
+  "bad_channel_comparison": {
+    "n_subjects_tested": 20,
+    "naive_3sd_rejections": [
+      {
+        "subject": "v108",
+        "bad_channels": [
+          "C3"
+        ]
+      },
+      {
+        "subject": "v110",
+        "bad_channels": [
+          "O1"
+        ]
+      },
+      {
+        "subject": "v114",
+        "bad_channels": [
+          "Fp1"
+        ]
+      },
+      {
+        "subject": "v121",
+        "bad_channels": [
+          "C3"
+        ]
+      },
+      {
+        "subject": "v123",
+        "bad_channels": [
+          "P3"
+        ]
+      },
+      {
+        "subject": "v127",
+        "bad_channels": [
+          "O1"
+        ]
+      },
+      {
+        "subject": "v12p",
+        "bad_channels": [
+          "T8"
+        ]
+      }
+    ],
+    "prep_reference_rejections": [
+      {
+        "subject": "v107",
+        "bad_channels": [
+          "Fz (robust_dev_z=9.85>5.0,max_corr=0.39<0.40)"
+        ]
+      },
+      {
+        "subject": "v108",
+        "bad_channels": [
+          "Fp1 (robust_dev_z=7.19>5.0)",
+          "F3 (robust_dev_z=6.97>5.0)",
+          "C3 (robust_dev_z=8.09>5.0)",
+          "T8 (robust_dev_z=8.09>5.0)",
+          "P8 (robust_dev_z=8.09>5.0)",
+          "Fz (robust_dev_z=8.09>5.0)",
+          "Cz (robust_dev_z=8.09>5.0)",
+          "Pz (robust_dev_z=8.09>5.0)"
+        ]
+      },
+      {
+        "subject": "v111",
+        "bad_channels": [
+          "F3 (robust_dev_z=8.90>5.0)"
+        ]
+      },
+      {
+        "subject": "v113",
+        "bad_channels": [
+          "Fp1 (robust_dev_z=5.06>5.0)"
+        ]
+      },
+      {
+        "subject": "v114",
+        "bad_channels": [
+          "Fp1 (robust_dev_z=17.20>5.0)",
+          "F3 (robust_dev_z=5.40>5.0)",
+          "C3 (robust_dev_z=6.07>5.0)",
+          "P4 (robust_dev_z=5.23>5.0)",
+          "F8 (robust_dev_z=6.07>5.0)",
+          "T8 (robust_dev_z=6.07>5.0)",
+          "P8 (robust_dev_z=6.07>5.0)",
+          "Cz (robust_dev_z=6.07>5.0)"
+        ]
+      },
+      {
+        "subject": "v117",
+        "bad_channels": [
+          "Fp1 (robust_dev_z=5.06>5.0)",
+          "F3 (robust_dev_z=5.06>5.0)",
+          "F4 (robust_dev_z=12.31>5.0)",
+          "F7 (robust_dev_z=5.23>5.0)",
+          "T7 (robust_dev_z=6.24>5.0)",
+          "T8 (robust_dev_z=6.07>5.0)",
+          "P7 (robust_dev_z=6.24>5.0)",
+          "P8 (robust_dev_z=6.24>5.0)",
+          "Cz (robust_dev_z=6.07>5.0)"
+        ]
+      },
+      {
+        "subject": "v120",
+        "bad_channels": [
+          "O2 (max_corr=0.31<0.40)"
+        ]
+      },
+      {
+        "subject": "v121",
+        "bad_channels": [
+          "Fp1 (robust_dev_z=20.91>5.0)",
+          "Fp2 (robust_dev_z=20.91>5.0)",
+          "Cz (robust_dev_z=24.96>5.0)"
+        ]
+      },
+      {
+        "subject": "v125",
+        "bad_channels": [
+          "P3 (max_corr=0.36<0.40)",
+          "T7 (max_corr=0.29<0.40)"
+        ]
+      }
+    ]
+  },
+  "environment": {
+    "numpy": {
+      "status": "available",
+      "version": "2.5.4"
+    },
+    "scipy": {
+      "status": "missing"
+    },
+    "mne": {
+      "status": "missing"
+    },
+    "pymatreader": {
+      "status": "missing"
+    },
+    "h5py": {
+      "status": "missing"
+    },
+    "pandas": {
+      "status": "missing"
+    }
+  }
+}
